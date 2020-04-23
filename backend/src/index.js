@@ -9,7 +9,12 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 mongoose.connect('mongodb+srv://semana:semana@omnistack-dw2vz.mongodb.net/insta-rocket?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
+    keepAlive: 1,
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+})
+    .then(() => console.log('DB Connected!'))
+    .catch(err => {console.log(`DB Connection Error: ${err.message}`);
 });
 
 app.use((req, res, next) => {
